@@ -1,0 +1,41 @@
+name: Deploy Laravel API to Hostinger
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Clear Cache Optimize
+        run: php artisan optimize
+
+      - name: Migrate
+        run: php artisan migrate --force
+
+      - name: Deploy to Hostinger
+        uses: appleboy/scp-action@master
+        with:
+          host: 93.127.208.171
+          username: u568541189
+          password: Shankha@2024
+          port: 65002
+          source: .
+          target: domains/
+      
+      - name: Run php artisan optimize on Hostinger
+        run: sshpass -p 'Shankha@2024' ssh -o StrictHostKeyChecking=no u568541189@93.127.208.171 -p 65002 'cd domains/shankhaadmin.in/public_html/api && php artisan optimize'
