@@ -23,8 +23,6 @@ jobs:
 
       - name: Deploy to CPANEL
         uses: appleboy/scp-action@master
-        env:
-          TERM: xterm  
         with:
           host: dodap.ca
           username: zdn69wo5iwc8
@@ -32,3 +30,4 @@ jobs:
           port: 22
           source: .
           target: /home/zdn69wo5iwc8/public_html/admin.dodap.ca
+          env: "TERM=xterm"
