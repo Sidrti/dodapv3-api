@@ -23,6 +23,8 @@ jobs:
 
       - name: Deploy to CPANEL
         uses: appleboy/scp-action@master
+        env:
+          TERM: xterm  
         with:
           host: dodap.ca
           username: zdn69wo5iwc8
