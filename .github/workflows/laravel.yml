@@ -21,7 +21,7 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader
 
-      - name: Deploy to Hostinger
+      - name: Deploy to CPANEL
         uses: appleboy/scp-action@master
         with:
           host: dodap.ca
@@ -29,4 +29,4 @@ jobs:
           password: West40$Build+%
           port: 22
           source: .
-          target: www/admin.dodap.ca
+          target: public_html/admin.dodap.ca
